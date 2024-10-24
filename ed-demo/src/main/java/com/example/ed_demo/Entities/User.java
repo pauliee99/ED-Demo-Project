@@ -101,5 +101,11 @@ public class User {
         this.homeAddress = homeAddress;
     }
 
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", gender=" + gender
+                + ", birthdate=" + birthdate + ", workAddress=" + workAddress + ", homeAddress=" + homeAddress + "]";
+    }
+
     
 }

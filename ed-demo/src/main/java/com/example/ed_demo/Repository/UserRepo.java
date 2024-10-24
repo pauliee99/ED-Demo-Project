@@ -11,11 +11,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path="users")
 public interface UserRepo  extends JpaRepository<User, Integer>{
-    @Query("select p from users p where p.userIn = ?1")
+    @Query("select u from User u")
     List<User> findAll(User user);
 
     //boolean findFirstByUserIn(User userIn);
 
-    @Query("select distinct p from Postponement p where p.userIn = ?1")
-    Optional<User> findDistinctByUser(User user);
+    // @Query("select distinct p from Postponement p where p.userIn = ?1")
+    // Optional<User> findDistinctByUser(User user);
 }
