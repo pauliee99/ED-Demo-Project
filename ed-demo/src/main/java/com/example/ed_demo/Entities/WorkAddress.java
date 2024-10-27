@@ -54,5 +54,15 @@ public class WorkAddress {
         this.postal_code = postal_code;
     }
 
-    
+    @Override
+    public String toString() {
+        return street_name + " " + street_num + ",  " + postal_code;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "WorkAddress [id=" + id + ", street_name=" + street_name + ", street_num=" + street_num
+    //             + ", postal_code=" + postal_code + "]";
+    // }
+
 }

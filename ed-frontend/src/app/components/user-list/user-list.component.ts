@@ -20,10 +20,6 @@ export class UserListComponent implements OnInit  {
   }
 
   ngOnInit() {
-    console.log(this.getUsers());
-    this.users = [
-      { id: 1, firstname: 'Airi', lastname: 'Satou', gender: 'F', birthdate: '2008/11/28', workAddress: 'Tokyo', homeAddress: 'Tokyo' },
-      { id: 2, firstname: 'Tiger', lastname: 'Nixon', gender: 'M', birthdate: '2011/04/25', workAddress: 'Edinburgh', homeAddress: 'Edinburgh' }
-    ];
+    this.getUsers()
   }
 }

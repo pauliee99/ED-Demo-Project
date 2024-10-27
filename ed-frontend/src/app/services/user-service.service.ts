@@ -28,7 +28,7 @@ export class UserServiceService {
     const url = `${this.Url}/api/users`;
     return this.http.get<User[]>(url)
     .pipe(
-      tap(_ => this.log('fetched users')), 
+      // tap(_ => this.log('fetched users')),   
       catchError(this.handleError<User[]>('getUsers', []))
     );
   }

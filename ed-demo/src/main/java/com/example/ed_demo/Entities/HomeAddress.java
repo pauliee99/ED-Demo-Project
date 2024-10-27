@@ -54,5 +54,16 @@ public class HomeAddress {
         this.postal_code = postal_code;
     }
 
+    @Override
+    public String toString() {
+        return street_name + " " + street_num + ",  " + postal_code;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "HomeAddress [id=" + id + ", street_name=" + street_name + ", street_num=" + street_num
+    //             + ", postal_code=" + postal_code + "]";
+    // }
+
     
 }
