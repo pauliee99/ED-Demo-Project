@@ -1,0 +1,34 @@
+<div class="container wrapper">
+    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="col-md-2">Firstname</th>
+                <th class="col-md-2">Lastname</th>
+                <th class="col-md-2">Gender</th>
+                <th class="col-md-2">Birthdate</th>
+                <th class="col-md-2">Work Address</th>
+                <th class="col-md-2">Home Address</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th class="col-md-2">Firstname</th>
+                <th class="col-md-2">Lastname</th>
+                <th class="col-md-2">Gender</th>
+                <th class="col-md-2">Birthdate</th>
+                <th class="col-md-2">Work Address</th>
+                <th class="col-md-2">Home Address</th>
+            </tr>
+        </tfoot>
+        @for (user of users; track user.id) {
+            <tbody>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.birthdate }}</td>
+                <td>{{ user.workAddress }}</td>
+                <td>{{ user.homeAddress }}</td>
+            </tbody>
+        } @empty {<li>There are no users in the system.</li>}
+    </table>
+  </div>
