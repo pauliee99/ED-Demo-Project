@@ -33,6 +33,14 @@ export class UserServiceService {
     );
   }
 
+  addUser(user: User): Observable<User> {
+    const url = `${this.Url}/api/users`;
+    return this.http.post<User>(url, user, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('addUser', user))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

@@ -1,33 +1,46 @@
 <div class="container">
     <h1>Create New User Form</h1>
-    <form id="userForm">
+    <form id="userForm" (ngSubmit)="onSubmit()" #userForm="ngForm">
         <div>
             <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" required>
+            <input type="text" id="firstname" name="firstname" required [(ngModel)]="user.firstname">
         </div>
         <div>
             <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" required>
+            <input type="text" id="lastname" name="lastname" required [(ngModel)]="user.lastname">
         </div>
         <div>
             <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
+            <select id="gender" name="gender" required [(ngModel)]="user.gender">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
             </select>
         </div>
         <div>
             <label for="birthdate">Birthdate:</label>
-            <input type="date" id="birthdate" name="birthdate" required>
+            <input type="date" id="birthdate" name="birthdate" required [(ngModel)]="user.birthdate">
         </div>
-        <div>
-            <label for="workAddress">Work Address:</label>
-            <input type="text" id="workAddress" name="workAddress" required>
+
+        <!-- Work Address Section -->
+        <div>Work Address:
+            <label for="workAddressName">Street Name:</label>
+            <input type="text" id="workAddressName" name="workAddressName" required [(ngModel)]="user.workAddress.street_name">
+            <label for="workAddressNum">Street Number:</label>
+            <input type="text" id="workAddressNum" name="workAddressNum" required [(ngModel)]="user.workAddress.street_num">
+            <label for="workAddressPK">Postal Code:</label>
+            <input type="text" id="workAddressPK" name="workAddressPK" required [(ngModel)]="user.workAddress.postal_code">
         </div>
-        <div>
-            <label for="homeAddress">Home Address:</label>
-            <input type="text" id="homeAddress" name="homeAddress" required>
+
+        <!-- Home Address Section -->
+        <div>Home Address:
+            <label for="homeAddressName">Street Name:</label>
+            <input type="text" id="homeAddressName" name="homeAddressName" required [(ngModel)]="user.homeAddress.street_name">
+            <label for="homeAddressNum">Street Number:</label>
+            <input type="text" id="homeAddressNum" name="homeAddressNum" required [(ngModel)]="user.homeAddress.street_num">
+            <label for="homeAddressPK">Postal Code:</label>
+            <input type="text" id="homeAddressPK" name="homeAddressPK" required [(ngModel)]="user.homeAddress.postal_code">
         </div>
+        
         <div>
             <button type="submit">Submit</button>
         </div>

@@ -21,7 +21,7 @@
             </tr>
         </tfoot>
         @for (user of users; track user.id) {
-            <tbody>
+            <tbody routerLink="/new-user" routerLinkActive="active" ariaCurrentWhenActive="page">
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.gender }}</td>

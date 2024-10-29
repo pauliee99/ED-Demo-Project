@@ -5,5 +5,6 @@ import { NewUserComponent } from './new-user/new-user.component';
 
 export const routes: Routes = [
     { path: '', component: UserListComponent },
-    { path: 'new-user', component: NewUserComponent }
+    { path: 'new-user', component: NewUserComponent },
+    { path: 'edit-user', component: NewUserComponent }
 ];
