@@ -20,15 +20,30 @@
                 <th class="col-md-2">Home Address</th>
             </tr>
         </tfoot>
-        @for (user of users; track user.id) {
-            <tbody routerLink="/new-user" routerLinkActive="active" ariaCurrentWhenActive="page">
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.gender }}</td>
-                <td>{{ user.birthdate }}</td>
-                <td>{{ user.workAddress }}</td>
-                <td>{{ user.homeAddress }}</td>
-            </tbody>
-        } @empty {<li>There are no users in the system.</li>}
+        <!-- @for (user of users; track user.id) {
+            <tbody>
+                <tr routerLink="/edit-user" routerLinkActive="active" ariaCurrentWhenActive="page">
+                  <td>{{ user.firstname }}</td>
+                  <td>{{ user.lastname }}</td>
+                  <td>{{ user.gender }}</td>
+                  <td>{{ user.birthdate }}</td>
+                  <td>{{ user.workAddress }}</td>
+                  <td>{{ user.homeAddress }}</td>
+                </tr>
+              </tbody>
+        } @empty {<li>There are no users in the system.</li>} -->
+        <tbody>
+            <tr *ngFor="let user of users" routerLink="/edit-user" routerLinkActive="active" ariaCurrentWhenActive="page">
+              <td>{{ user.firstname }}</td>
+              <td>{{ user.lastname }}</td>
+              <td>{{ user.gender }}</td>
+              <td>{{ user.birthdate }}</td>
+              <td>{{ user.workAddress }}</td>
+              <td>{{ user.homeAddress }}</td>
+            </tr>
+            <tr *ngIf="users.length === 0">
+              <td colspan="6">There are no users in the system.</td>
+            </tr>
+          </tbody>
     </table>
   </div>

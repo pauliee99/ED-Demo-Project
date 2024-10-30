@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NgForOf } from '@angular/common'; 
 import { User } from '@entities/User';
 import { UserServiceService } from '@services/user-service.service';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, NgForOf],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
