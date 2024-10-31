@@ -33,6 +33,13 @@ export class UserServiceService {
     );
   }
 
+  getUserById(id: number): Observable<User> {
+    const url = `${this.Url}/api/users/${id}`;
+    return this.http.get<User>(url).pipe(
+      catchError(this.handleError<User>(`getUserById id=${id}`))
+    );
+  }
+
   addUser(user: User): Observable<User> {
     const url = `${this.Url}/api/users`;
     return this.http.post<User>(url, user, this.httpOptions)

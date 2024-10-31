@@ -35,21 +35,48 @@ public class UserController {
 	public List<UserDTO> getAllUsers() {
 		List<User> users = userRepo.findAll();
 		List<UserDTO> usersDto = new ArrayList<>();	
-		UserDTO newUserDto = new UserDTO();
 		for (User user : users) {
+			UserDTO newUserDto = new UserDTO();
+			newUserDto.setId(user.getId());
+			newUserDto.setFirstname(user.getFirstname());
+			newUserDto.setLastname(user.getLastname());
+			newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
+			newUserDto.setBirthdate(user.getBirthdate());
 			if (user.getWorkAddress() != null) {
-				newUserDto.setId(user.getId());
-				newUserDto.setFirstname(user.getFirstname());
-				newUserDto.setLastname(user.getLastname());
-				newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
-				newUserDto.setBirthdate(user.getBirthdate());
 				newUserDto.setWorkAddress(user.getWorkAddress().toString());
-				newUserDto.setHomeAddress(user.getHomeAddress().toString());
-				usersDto.add(newUserDto);
+			} else {
+				newUserDto.setWorkAddress(null);
 			}
+			if (user.getHomeAddress() != null) {
+				newUserDto.setHomeAddress(user.getHomeAddress().toString());
+			} else {
+				newUserDto.setHomeAddress(null);
+			}
+			usersDto.add(newUserDto);
 		}
-		// return userRepo.findAll();
 		return usersDto;
+	}
+
+	@GetMapping("api/users/{id}")
+	public UserDTO getUser(@PathVariable int id) {
+		User user = userRepo.findById(id).get();
+		UserDTO newUserDto = new UserDTO();
+		newUserDto.setId(user.getId());
+		newUserDto.setFirstname(user.getFirstname());
+		newUserDto.setLastname(user.getLastname());
+		newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
+		newUserDto.setBirthdate(user.getBirthdate());
+		if (user.getWorkAddress() != null) {
+			newUserDto.setWorkAddress(user.getWorkAddress().toString());
+		} else {
+			newUserDto.setWorkAddress(null);
+		}
+		if (user.getHomeAddress() != null) {
+			newUserDto.setHomeAddress(user.getHomeAddress().toString());
+		} else {
+			newUserDto.setHomeAddress(null);
+		}
+		return newUserDto;
 	}
 
 	@PostMapping("api/users")
