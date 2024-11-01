@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '@entities/User';
 import { UserServiceService } from '@services/user-service.service';
 
@@ -28,10 +29,11 @@ export class EditUserComponent {
     },
   };
 
-  constructor(private userService: UserServiceService) {}
+  constructor(private userService: UserServiceService, private route: ActivatedRoute,) {}
 
   ngOnInit() {
-    // this.userService.getUserById()
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.userService.getUserById(id)
   }
   
   onSubmit() {
