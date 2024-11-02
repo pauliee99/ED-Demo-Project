@@ -33,7 +33,7 @@
               </tbody>
         } @empty {<li>There are no users in the system.</li>} -->
         <tbody>
-            <tr *ngFor="let user of users" routerLink="/edit-user" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <tr *ngFor="let user of users" [routerLink]="['/user', user.id]" routerLinkActive="active" ariaCurrentWhenActive="page">
               <td>{{ user.firstname }}</td>
               <td>{{ user.lastname }}</td>
               <td>{{ user.gender }}</td>

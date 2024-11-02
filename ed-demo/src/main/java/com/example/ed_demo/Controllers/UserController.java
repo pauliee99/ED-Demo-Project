@@ -58,12 +58,14 @@ public class UserController {
 	}
 
 	@GetMapping("api/users/{id}")
-	public UserDTO getUser(@PathVariable int id) {
+	public User getUser(@PathVariable int id) {
+		// public UserDTO getUser(@PathVariable int id) {
 		User user = userRepo.findById(id).get();
 		UserDTO newUserDto = new UserDTO();
 		newUserDto.setId(user.getId());
 		newUserDto.setFirstname(user.getFirstname());
 		newUserDto.setLastname(user.getLastname());
+		// newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender()));//.name()
 		newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
 		newUserDto.setBirthdate(user.getBirthdate());
 		if (user.getWorkAddress() != null) {
@@ -76,7 +78,8 @@ public class UserController {
 		} else {
 			newUserDto.setHomeAddress(null);
 		}
-		return newUserDto;
+		return user;
+		// return newUserDto;
 	}
 
 	@PostMapping("api/users")
