@@ -33,8 +33,16 @@ export class EditUserComponent {
   }
   
   onSubmit() {
-    this.userService.addUser(this.user).subscribe(response => {
+    console.log(this.user);
+    this.userService.editUser(this.user).subscribe(response => {
       console.log("User created successfully!", response);
+    });
+  }
+
+  onDelete() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.userService.deleteUser(id).subscribe(response => {
+      console.log("User deleted successfully!", response);
     });
   }
 }

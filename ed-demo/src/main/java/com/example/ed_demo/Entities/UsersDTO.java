@@ -2,7 +2,13 @@ package com.example.ed_demo.Entities;
 
 import java.time.LocalDate;
 
-public class UserDTO {
+// import com.example.ed_demo.Entities.User.Gender;
+
+public class UsersDTO {
+
+    public enum Gender {
+        M, F
+    }
 
     private int id;
 
@@ -10,13 +16,13 @@ public class UserDTO {
 
     private String lastname;
 
-    private int gender;
+    private Gender gender;
 
     private LocalDate birthdate;
 
-    private WorkAddress workAddress;
+    private String workAddress;
 
-    private HomeAddress homeAddress;
+    private String homeAddress;
 
     public int getId() {
         return id;
@@ -42,11 +48,11 @@ public class UserDTO {
         this.lastname = lastname;
     }
 
-    public int getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -58,19 +64,19 @@ public class UserDTO {
         this.birthdate = birthdate;
     }
 
-    public WorkAddress getWorkAddress() {
+    public String getWorkAddress() {
         return workAddress;
     }
 
-    public void setWorkAddress(WorkAddress workAddress) {
+    public void setWorkAddress(String workAddress) {
         this.workAddress = workAddress;
     }
 
-    public HomeAddress getHomeAddress() {
+    public String getHomeAddress() {
         return homeAddress;
     }
 
-    public void setHomeAddress(HomeAddress homeAddress) {
+    public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
     }
 

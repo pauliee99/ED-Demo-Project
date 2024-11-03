@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,15 +33,15 @@ public class UserController {
     private HomeAddrRepo homeAddress;
 
     @GetMapping("api/users")
-	public List<UserDTO> getAllUsers() {
+	public List<UsersDTO> getAllUsers() {
 		List<User> users = userRepo.findAll();
-		List<UserDTO> usersDto = new ArrayList<>();	
+		List<UsersDTO> usersDto = new ArrayList<>();
 		for (User user : users) {
-			UserDTO newUserDto = new UserDTO();
+			UsersDTO newUserDto = new UsersDTO();
 			newUserDto.setId(user.getId());
 			newUserDto.setFirstname(user.getFirstname());
 			newUserDto.setLastname(user.getLastname());
-			newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
+			newUserDto.setGender(UsersDTO.Gender.valueOf(user.getGender().name()));
 			newUserDto.setBirthdate(user.getBirthdate());
 			if (user.getWorkAddress() != null) {
 				newUserDto.setWorkAddress(user.getWorkAddress().toString());
@@ -58,28 +59,29 @@ public class UserController {
 	}
 
 	@GetMapping("api/users/{id}")
-	public User getUser(@PathVariable int id) {
-		// public UserDTO getUser(@PathVariable int id) {
+	public UserDTO getUser(@PathVariable int id) {
 		User user = userRepo.findById(id).get();
 		UserDTO newUserDto = new UserDTO();
 		newUserDto.setId(user.getId());
 		newUserDto.setFirstname(user.getFirstname());
 		newUserDto.setLastname(user.getLastname());
-		// newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender()));//.name()
-		newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
+		// newUserDto.setGender(UserDTO.Gender.valueOf(user.getGender().name()));
+		newUserDto.setGender(user.getGender().name() == "M" ? 0 : 1);
 		newUserDto.setBirthdate(user.getBirthdate());
-		if (user.getWorkAddress() != null) {
-			newUserDto.setWorkAddress(user.getWorkAddress().toString());
-		} else {
-			newUserDto.setWorkAddress(null);
-		}
-		if (user.getHomeAddress() != null) {
-			newUserDto.setHomeAddress(user.getHomeAddress().toString());
-		} else {
-			newUserDto.setHomeAddress(null);
-		}
-		return user;
-		// return newUserDto;
+		newUserDto.setWorkAddress(user.getWorkAddress());
+		newUserDto.setHomeAddress(user.getHomeAddress());
+		// if (user.getWorkAddress() != null) {
+		// 	newUserDto.setWorkAddress(user.getWorkAddress().toString());
+		// } else {
+		// 	newUserDto.setWorkAddress(null);
+		// }
+		// if (user.getHomeAddress() != null) {
+		// 	newUserDto.setHomeAddress(user.getHomeAddress().toString());
+		// } else {
+		// 	newUserDto.setHomeAddress(null);
+		// }
+		// return user;
+		return newUserDto;
 	}
 
 	@PostMapping("api/users")
@@ -115,5 +117,31 @@ public class UserController {
 	@DeleteMapping("api/users/{id}")
     public void deleteStudent(@PathVariable int id) {
     	userRepo.deleteById(id);
+    }
+
+	@PutMapping("api/users/{id}")
+    public ResponseEntity<Object> updateUser(@RequestBody User user) {
+		if (user.getWorkAddress() != null) {
+			workAddress.save(user.getWorkAddress());
+		}
+	
+		if (user.getHomeAddress() != null) {
+			homeAddress.save(user.getHomeAddress());
+		}
+
+		User savedUser = userRepo.save(user);
+
+		if (savedUser != null && savedUser.getId() > 0) {
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+        
+        return ResponseEntity.created(location).body("User updated successfully with ID: " + savedUser.getId());
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error: Failed to update user.");
+		}
     }
 }

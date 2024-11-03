@@ -48,6 +48,21 @@ export class UserServiceService {
     );
   }
 
+  deleteUser(id: number): Observable<User> {
+    const url = `${this.Url}/api/users/${id}`;
+    return this.http.delete<User>(url).pipe(
+      catchError(this.handleError<User>(`getUserById id=${id}`))
+    );
+  }
+
+  editUser(user: User): Observable<User> {
+    const url = `${this.Url}/api/users/${user.id}`;
+    return this.http.put<User>(url, user, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('addUser', user))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
